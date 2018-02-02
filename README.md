@@ -7,7 +7,10 @@ https://www.avito.ma/lij?o=2&q=iphone&mpr=2500&ca=5
 * o = pagination page
 * q = the search query
 * mpr = minimum price
-* ca = category (missed)
+* cg = category 
+    * http://www.avito.ma/templates/api/confcategories.js?v=3
+* ca =  city id 
+    * http://www.avito.ma/templates/api/confregions.js?v=3
 ## Vendo
 Personnaly i like the work of vendo.ma
 #### Search : 

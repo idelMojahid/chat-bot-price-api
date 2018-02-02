@@ -10,23 +10,7 @@ import os
 import argparse
 import ssl
 
-# Taking command line arguments from users
-parser = argparse.ArgumentParser()
-parser.add_argument('-k', '--keywords', help='delimited list input', type=str, required=True)
-parser.add_argument('-l', '--limit', help='delimited list input', type=str, required=False)
-parser.add_argument('-c', '--color', help='filter on color', type=str, required=False, choices=['red', 'orange', 'yellow', 'green', 'teal', 'blue', 'purple', 'pink', 'white', 'gray', 'black', 'brown'])
-args = parser.parse_args()
-search_keyword = [str(item) for item in args.keywords.split(',')]
-#setting limit on number of images to be downloaded
-if args.limit:
-    limit = int(args.limit)
-    if int(args.limit) >= 4:
-        limit = 4
-else:
-    limit = 4
 
-# This list is used to further add suffix to your search term. Each element of the list will help you download 100 images. First element is blank which denotes that no suffix is added to the search keyword of the above list. You can edit the list by adding/deleting elements from it.So if the first element of the search_keyword is 'Australia' and the second element of keywords is 'high resolution', then it will search for 'Australia High Resolution'
-keywords = [' high resolution']
 
 
 # Downloading entire Web Document (Raw Page Content)
@@ -92,59 +76,36 @@ def _images_get_all_items(page):
 
 
 ############## Main Program ############
-t0 = time.time()  # start the timer
+# Taking command line arguments from users
+def search_tag(query) :
+    
+    #query = 'samsung s7'
+    search_keyword = query
+    version = (3,0)
+    cur_version = sys.version_info
+    if cur_version >= version:  # If the Current Version of Python is 3.0 or above
+        # urllib library for Extracting web pages
+        from urllib.request import Request, urlopen
+        from urllib.request import URLError, HTTPError
 
+    else:  # If the Current Version of Python is 2.x
+        # urllib library for Extracting web pages
+        from urllib2 import Request, urlopen
+        from urllib2 import URLError, HTTPError
 
-version = (3,0)
-cur_version = sys.version_info
-if cur_version >= version:  # If the Current Version of Python is 3.0 or above
-    # urllib library for Extracting web pages
-    from urllib.request import Request, urlopen
-    from urllib.request import URLError, HTTPError
-
-else:  # If the Current Version of Python is 2.x
-    # urllib library for Extracting web pages
-    from urllib2 import Request, urlopen
-    from urllib2 import URLError, HTTPError
-
-# Download Image Links
-errorCount = 0
-i = 0
-while i < len(search_keyword):
+    # Download Image Links
     items = []
-    iteration = "\n" + "Item no.: " + str(i + 1) + " -->" + " Item name = " + str(search_keyword[i])
-    print (iteration)
-    print ("Evaluating...")
-    search_term = search_keyword[i]
+    search_term = search_keyword
     search = search_term.replace(' ', '%20')
-    dir_name = search_term + ('-' + args.color if args.color else '')
-
-    # make a search keyword  directory
-    try:
-        os.makedirs(dir_name)
-    except OSError as e:
-        if e.errno != 17:
-            raise
-            # time.sleep might help here
-        pass
-
-    j = 0
-    color_param = ('&tbs=ic:specific,isc:' + args.color) if args.color else ''
-    url = 'https://www.google.com/search?q=' + search + '&espv=2&biw=1366&bih=667&site=webhp&source=lnms&tbm=isch' + color_param + '&sa=X&ei=XosDVaCXD8TasATItgE&ved=0CAcQ_AUoAg'
+    url = 'https://www.google.com/search?q=' + search + '&espv=2&biw=1366&bih=667&site=webhp&source=lnms&tbm=isch' 
     raw_html = (download_page(url))
     time.sleep(0.1)
     items = items + (_images_get_all_items(raw_html))
-    print len(items)
-    exit()
-    # This allows you to write all the links into a test file. This text file will be created in the same directory as your code. You can comment out the below 3 lines to stop writing the output to the text file.
-    
-
-    
-
-   
-
-    i = i + 1
-
-print("\n")
-print("Everything downloaded!")
-print("Total Errors: "+ str(errorCount) + "\n")
+    link_picture = ''
+    for item in items :
+        link_split = item.split('.')
+        extension = link_split[-1]
+        if extension == 'jpg' :
+            link_picture  = item
+            break
+    return link_picture

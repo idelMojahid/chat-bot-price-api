@@ -2,7 +2,8 @@ import requests
 import json
 import numpy as np
 import sys
-
+#import image_dowloader
+from image_dowloader import search_tag
 def price_remove_outliners(data) :
     data.sort(reverse=True)
     data = data[:20]
@@ -31,5 +32,5 @@ for i in range(1,5) :
     ads = ads + results['list_ads']
 price_without_outliners = price_remove_outliners(prices)
 mean_price = get_price_mean(price_without_outliners)
-product_price = {'product' : query,'mean_price' : mean_price}
+product_price = {'product' : query,'mean_price' : mean_price,'image' : search_tag(query)}
 print json.dumps(product_price)
