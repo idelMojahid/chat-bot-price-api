@@ -1,0 +1,25 @@
+{
+  "name": "chat-bot-price",
+  "version": "1.0.0",
+  "description": "Chat bot for pricing",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idelMojahid/chat-bot-price.git"
+  },
+  "author": "idelMojahid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idelMojahid/chat-bot-price/issues"
+  },
+  "homepage": "https://github.com/idelMojahid/chat-bot-price#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "request": "^2.83.0"
+  }
+}
