@@ -15,7 +15,7 @@ getMeanPrice = function(query){
                 });
             }else{
                 let response = {found : false}
-                resolve(response);
+                reject(response);
             }
             
             });
