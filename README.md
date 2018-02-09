@@ -1,5 +1,6 @@
 This repo contains the data source of the chat bot "Data stream"
-
+#### Curent endpoint url
+http://ec2-34-230-73-74.compute-1.amazonaws.com
 # Main sources of prices
 ## Avito
 Using the api of avito :
