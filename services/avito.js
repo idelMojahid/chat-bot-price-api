@@ -6,7 +6,7 @@ var calculService = require('../services/calcul')
 getMeanPrice = (query)=>{
     return new Promise(
         (resolve,reject)=>{
-            getPricesAvito('iphone 6').then((data)=>{
+            getPricesAvito(query).then((data)=>{
                 resolve(calculService.meanPrices(data.prices_filtred));
             })
             //resolve("test");
