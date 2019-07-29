@@ -34,7 +34,6 @@ getPricesAvito = (query)=>{
     return new Promise(
         function (resolve, reject) {
             rp(options(query,1)).then((data)=>{
-                console.log(data);
                 prices = prices.concat(data.list_ads.map((e)=>{
                     if(e.price){
                         let price = e.price

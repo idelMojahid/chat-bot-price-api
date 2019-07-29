@@ -4,10 +4,15 @@ var calculService = require('../services/calcul')
 getMeanPrice = (query)=>{
     return new Promise(
         function (resolve, reject) {
-            getPricesVendo(query).then((data)=>{
-                //console.log(calculService.meanPrices(data.prices_filtred))
-                resolve(calculService.meanPrices(data.prices_filtred));
-            })
+            try {
+                getPricesVendo(query).then((data)=>{
+                    //console.log(calculService.meanPrices(data.prices_filtred))
+                    resolve(calculService.meanPrices(data.prices_filtred));
+                })
+            } catch (error) {
+                reject({'err':'cannot get price'})
+            }
+            
         })
     
 }

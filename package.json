@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/idelMojahid/chat-bot-price#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "lodash": "^4.17.5",

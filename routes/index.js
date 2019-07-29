@@ -16,7 +16,7 @@ router.get('/avito/:query?', (req, res) => {
     let query = req.params.query;
     let price_query = {query : query}
     avitoService.getMeanPrice(query).then((data)=>{
-        price_query['mean_price'] = data
+        price_query['mean_price'] = parseInt(data)
         res.send(price_query);
     });
 });
@@ -30,6 +30,8 @@ router.get('/vendo/:query?',(req, res)=>{
     vendoService.getMeanPrice(query).then((data)=>{
         price_query['mean_price'] = data
         res.send(price_query);
+    }).catch((err)=>{
+        res.send(err);
     });
 });
 module.exports = router;
